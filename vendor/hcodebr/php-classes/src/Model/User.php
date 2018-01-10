@@ -58,6 +58,38 @@ class User extends Model{
 		$_SESSION[User::SESSION] = NULL;
 		
 	}
+
+
+	public static function listAll()
+	{
+		$sql = new Sql();
+		return $sql->select ("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
+	}
+	public function save()
+	{
+		$sql = new Sql();
+		/*
+		CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_users_save`(
+		pdesperson VARCHAR(64), 
+		pdeslogin VARCHAR(64), 
+		pdespassword VARCHAR(256), 
+		pdesemail VARCHAR(128), 
+		pnrphone BIGINT, 
+		pinadmin TINYINT
+		*/
+
+
+
+		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+				$this->getdesperson(),
+				$this->getdeslogin(),
+				$this->getdespassword(),
+				$this->getdesemail(),
+				$this->getnrphone(),
+				$this->getinadmin()
+			));
+			$this->setData($results[0]);
+	}
 }
 
 
