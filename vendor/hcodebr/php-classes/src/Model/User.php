@@ -81,12 +81,12 @@ class User extends Model{
 
 
 		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
-				$this->getdesperson(),
-				$this->getdeslogin(),
-				$this->getdespassword(),
-				$this->getdesemail(),
-				$this->getnrphone(),
-				$this->getinadmin()
+				":desperson"=>$this->getdesperson(),
+				":deslogin"=>$this->getdeslogin(),
+				":despassword"=>$this->getdespassword(),
+				":desemail"=>$this->getdesemail(),
+				":nrphone"=>$this->getnrphone(),
+				":inadmin"=>$this->getinadmin()
 			));
 			$this->setData($results[0]);
 	}
