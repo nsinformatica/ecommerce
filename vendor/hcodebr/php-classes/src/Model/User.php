@@ -2,7 +2,7 @@
 namespace Hcode\Model;
 use \Hcode\DB\Sql;
 use \Hcode\Model;
-
+use \Hcode\Mailer;
 class User extends Model{
 
 	const SESSION = "User";
@@ -142,7 +142,7 @@ class User extends Model{
 		else
 		{
 			$data = $results[0];
-			$results2 = $sql->select("CALL sp_userpasswordsrecoveries_create(:iduser, :desip)", array(
+			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create(:iduser, :desip)", array(
 					":iduser"=>$data["iduser"],
 					":desip"=>$_SERVER["REMOTE_ADDR"]
 				));
@@ -164,6 +164,35 @@ class User extends Model{
 				return $data;
 			}
 		}
+	}
+	public static function validForgotDecrypt($code)
+	{
+		$idrecovery = mcrypt_decrypt (MCRYPT_RIJNDAEL_128, User::SECRET, base64_decode($code),MCRYPT_MODE_ECB);
+		$sql = new Sql();
+		$results = $sql->select("
+				SELECT * FROM tb_userspasswordsrecoveries a
+				INNER JOIN tb_users b USING(iduser)
+				INNER JOIN tb_persons c USING(idperson)
+				WHERE
+				a.idrecovery = :idrecovery
+				AND 
+				a.dtrecovery IS NULL
+				AND
+				DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW();
+
+
+			", array(
+					":idrecovery"=>$idrecovery
+				));
+				if(count($results)===0)
+				{
+					throw new \Exception("Não foi possível recuperar a senha.");
+					
+				}
+				else
+				{
+					return $results[0];
+				}
 	}
 	
 }

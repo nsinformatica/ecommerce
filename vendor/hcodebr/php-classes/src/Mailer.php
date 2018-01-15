@@ -3,27 +3,29 @@ namespace Hcode;
 use Rain\Tpl;
 class Mailer{
 	const USERNAME = "nsinformatica1972@gmail.com";
-	const PASSWORD = "49493817504";
+	const PASSWORD = "874587484454549493817504544445";
 	const NAME_FROM = "NS Informática";
 
-	private $this->mail;
+	private $mail;
 	public function __construct($toAddress, $toName, $subject, $tplName, $data = array())
 	{
 	$config = array(
-			"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir,"/views/email/",
+			"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/email/",
 			"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views/cache/",
 			
 		);
 
 		Tpl::configure( $config );
-		tpl = new Tpl();
+		$tpl = new Tpl();
+		
+
 		foreach ($data as $key => $value) {
-			$tpl->assign($key,$value)
+			$tpl->assign($key,$value);
 		}
 		$html = $tpl->draw($tplName, true);
 
 
-		$this->$this->mail = new \PHPMailer;
+	$this->mail = new \PHPMailer;
 	//Tell PHPMailer to use SMTP
 	$this->mail->isSMTP();
 	//Enable SMTP debugging
@@ -67,6 +69,8 @@ class Mailer{
 	//Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
 	//You can use imap_getmailboxes($imapStream, '/imap/ssl') to get a list of available folders or labels, this can
 	//be useful if you are trying to get this working on a non-Gmail IMAP server.
+	
+	/*
 	function save_mail($this->mail)
 	{
 	    //You can change 'Sent Mail' to any other folder or tag
@@ -76,12 +80,13 @@ class Mailer{
 	    $result = imap_append($imapStream, $path, $mail->getSentMIMEMessage());
 	    imap_close($imapStream);
 	    return $result;
-
-	public function send()
-
+	*/
 	}
+	public function send()
+	{
 		return $this->mail->send();
 	}
+	
 }
 
 ?>
