@@ -3,7 +3,7 @@ namespace Hcode;
 use Rain\Tpl;
 class Mailer{
 	const USERNAME = "nsinformatica1972@gmail.com";
-	const PASSWORD = "983463746309043940394039049767664";
+	const PASSWORD = "73847387493758478547858";
 	const NAME_FROM = "NS Informática";
 
 	private $mail;

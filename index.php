@@ -162,7 +162,7 @@ $app->get("/admin/forgot/sent", function(){
 	$page->setTpl("forgot-sent");
 });
 
-$app->post("/admin/forgot/reset", function(){
+$app->get("/admin/forgot/reset", function(){
 	$user = User::validForgotDecrypt($_GET["code"]);
 	$page = new PageAdmin([
 			"header"=>false,
