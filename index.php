@@ -178,7 +178,7 @@ $app->post("/admin/forgot/reset", function(){
 	User::setForgotUsed($forgot["idrecovery"]);
 	$user = new User();
 	$user->get ((int)$forgot["iduser"]);
-	$password = password_hash("password", PASSWORD_DEFAULT, [
+	$password = password_hash($_POST["password"], PASSWORD_DEFAULT, [
 			"cost"=>12
 		]);
 	$user->setPassword($password);
