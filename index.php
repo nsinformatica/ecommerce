@@ -251,7 +251,8 @@ $app->get("/categories/:idcategory", function($idcategory){
 	$category->get((int)$idcategory);
 	$page = new Page();
 	$page->SetTpl("category", [
-			'category'=>$category->getValues()
+			'category'=>$category->getValues(),
+			'products'=>[]
 		]);
 });
 
