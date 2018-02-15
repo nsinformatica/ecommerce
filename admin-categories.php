@@ -60,15 +60,20 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
 	header('Location: /admin/categories');
 	exit;
 });
-$app->get("/categories/:idcategory", function($idcategory){
+
+
+$app->get("/admin/categories/:idcategory/products", function($idcategory){
+	User::verifyLogin();
 	$category = new Category();
 	$category->get((int)$idcategory);
-	$page = new Page();
-	$page->SetTpl("category", [
+	$page = new PageAdmin();
+	$page->SetTpl("categories-products", [
 			'category'=>$category->getValues(),
-			'products'=>[]
+			'productsRelated'=>$category->getProducts(),
+			'productsNotRelated'=>$category->getProducts(false)
 		]);
 });
+
 
 
 ?>
