@@ -79,6 +79,22 @@ class Category extends Model{
 				]);
 		}
 	}
+	public function addProduct(Products $product)
+	{
+		$sql = new Sql();
+		$sql->query("INSERT INTO tb_productscategories (idcategory, idproduct)VALUES(:idcategory, :idproduct", [
+				':idcategory'=>$this->getidcategory(),
+				':idproduct'=>$product->getidproduct()
+			]);
+	}
+	public function removeProduct(Products $product)
+	{
+		$sql = new Sql();		
+		$sql->query("DELETE FROM tb_productscategories WHERE idcategory=:idcategory AND idproduct=:idproduct", [
+				':idcategory'=>$this->getidcategory(),
+				':idproduct'=>$product->getidproduct()
+			]);
+	}
 }
 
 
