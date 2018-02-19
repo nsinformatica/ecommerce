@@ -83,7 +83,7 @@ $app->get("/admin/categories/:idcategory/products/:idproduct/add", function($idc
 	$product = new Products();
 	$product->get((int)$idproduct);
 	$category->addProduct($product);
-	header("/admin/categories/".$idcategory."/products");
+	header("Location: /admin/categories/".$idcategory."/products");
 	exit;
 });
 
@@ -95,7 +95,7 @@ $app->get("/admin/categories/:idcategory/products/:idproduct/remove", function($
 	$product = new Products();
 	$product->get((int)$idproduct);
 	$category->removeProduct($product);
-	header("/admin/categories/".$idcategory."/products");
+	header("Location: /admin/categories/".$idcategory."/products");
 	exit;
 });
 
