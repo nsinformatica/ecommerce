@@ -4,6 +4,8 @@ use \Hcode\DB\Sql;
 use \Hcode\Model;
 use \Hcode\Mailer;
 use \Hcode\Model\User;
+// erro
+
 
 class Cart extends Model{
 	

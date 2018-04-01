@@ -3,6 +3,7 @@ use \Hcode\Page;
 use \Hcode\Model\Products;
 use \Hcode\Model\Category;
 use \Hcode\Model\Cart;
+// erro
 
 $app->get('/', function() {
     
